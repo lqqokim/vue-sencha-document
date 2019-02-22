@@ -24,7 +24,22 @@
 </template>
 
 <script>
-export default {};
+export default {
+	props: ['propsdata'],
+	data() {
+		return {
+			activeTab: this.propsdata,
+		};
+	},
+	updated() {
+		console.log('updated');
+	},
+	watch: {
+		propsdata(tab) {
+			this.activeTab = tab;
+		},
+	},
+};
 </script>
 
 <style scoped>

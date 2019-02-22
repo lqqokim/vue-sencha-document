@@ -6,18 +6,20 @@
 				<img class="slide-btn">
 			</div>
 
-			<EastTabContent />
+			<EastTabContent v-bind:propsdata="selectedTab" />
 
 			<div class="tabs">
 				<div
 				 class="tab first"
-				 @click="onClickTab"
+				 v-bind:class="activeClass"
+				 @click="onClickTab('first')"
 				>
 					<span class="title">A Tab</span>
 				</div>
 				<div
 				 class="tab second"
-				 @click="onClickTab"
+				 v-bind:class="activeClass"
+				 @click="onClickTab('second')"
 				>
 					<span class="title">Property Grid</span>
 					<span class="close"></span>
@@ -34,16 +36,25 @@ import EastTabContent from './EastTabContent';
 export default {
 	data() {
 		return {
-			selectedTab: 'first',
+			selectedTab: '',
 		};
+	},
+	computed: {
+		activeClass: function(e) {
+			console.log(e);
+			return null;
+		},
 	},
 	components: {
 		EastTabContent,
 	},
 	methods: {
-		onClickTab(e) {
-			console.log(e);
+		onClickTab(selectedTab) {
+			this.selectedTab = selectedTab;
 		},
+	},
+	created() {
+		this.selectedTab = 'first';
 	},
 };
 </script>
