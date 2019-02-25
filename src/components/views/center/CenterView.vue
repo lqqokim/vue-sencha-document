@@ -1,114 +1,145 @@
 <template>
-	<div class="center">
-		<div class="left-btn"></div>
-		<div class="right-btn"></div>
-		<div class="tabs">
-			<div class="tab-wrapper">
-				<div class="tab first">
-					<span class="title">Close Me</span>
-					<span class="close"></span>
-				</div>
-				<div class="tab second">
-					<div class="title">Center Panel</div>
-				</div>
-			</div>
-		</div>
-		<div class="content"></div>
-	</div>
+  <div class="center">
+    <div class="left-btn"></div>
+    <div class="right-btn"></div>
+    <div class="header">
+      <div class="tab-wrapper">
+        <div
+          class="tab"
+          v-for="(item, index) in tabs"
+          :key="index"
+          @click="onClickTab(index)"
+          :class="{ 'active': selectedTabIndex === index }"
+        >
+          <div class="title">{{item.title}}</div>
+          <div v-if="!index" class="close"></div>
+        </div>
+      </div>
+    </div>
+
+    <CenterTabContent :tabIndex="selectedTabIndex"/>
+  </div>
 </template>
 
 <script>
-export default {};
+import CenterTabContent from './tab/CenterTabContent';
+
+export default {
+    data() {
+        return {
+            selectedTabIndex: 0,
+            tabs: [
+                {
+                    title: 'Close Me',
+                },
+                {
+                    title: 'Center Panel',
+                },
+            ],
+        };
+    },
+    components: {
+        CenterTabContent,
+    },
+    methods: {
+        onClickTab(index) {
+            this.selectedTabIndex = index;
+        },
+    },
+};
 </script>
 
 <style scoped>
 .center {
-	background-color: #3892d3;
-	left: 208px;
-	right: 241px;
-	position: absolute;
-	height: 100%;
+    background-color: #3892d3;
+    left: 208px;
+    right: 241px;
+    position: absolute;
+    height: 100%;
 }
 
-.tabs {
-	height: 31px;
-	background-color: #157fcc;
-	border-bottom: 5px solid #b4d1ea;
-	/* overflow-x: auto; */
+.header {
+    height: 31px;
+    background-color: #157fcc;
+    border-bottom: 5px solid #b4d1ea;
+
+    position: relative;
+    overflow: hidden;
+}
+
+.header.add-margin {
+    padding: 0 25px 0;
 }
 
 .tab {
-	background-color: #4b9cd7;
-	color: white;
+    background-color: #4b9cd7;
+    color: white;
+    box-sizing: border-box;
+    cursor: pointer;
+    float: left;
+    height: 31px;
+    border-radius: 3px 3px 0px 0px;
+    margin-right: 3px;
 }
 
 .tab:hover {
-	background-color: #5fa7db;
+    background-color: #5fa7db;
 }
 
 .tab.active {
-	background-color: #add2ed;
-	color: #157fcc;
+    background-color: #add2ed;
+    color: #157fcc;
 }
 
-/* first tab */
-.tabs .first {
-	cursor: pointer;
-	width: 96.078px;
-	height: 31px;
-	margin-right: 2px;
-	float: left;
-	border-radius: 3px 3px 0px 0px;
-}
-
-.first .title {
-	position: relative;
-	top: 6px;
-	left: 12px;
+.title {
+    float: left;
+    margin: 10px 15px 0 15px;
 }
 
 .close {
-	top: -17px;
-	left: 82px;
-	display: block;
-	position: relative;
-	font-size: 0;
-	line-height: 0;
+    float: left;
+    width: 12px;
+    height: 12px;
+    background-color: red;
 
-	width: 12px;
-	height: 12px;
-	/* background-image: url(src\assets\icons\tab-default-close.png); */
+    margin: 2px;
+    /* background-image: url(src\assets\icons\tab-default-close.png); */
 }
 
-/* second tab */
-.second {
-	cursor: pointer;
-	float: left;
-	width: 102.484px;
-	height: 31px;
-	border-radius: 3px 3px 0px 0px;
+.center .tab-wrapper {
+    position: absolute;
+    width: 1120px;
 }
 
-.second .title {
-	padding: 8px 0px 0px 12px;
+.left-btn {
+    /* background-image: url(./images/default-scroll-left.png); */
+    cursor: pointer;
+    z-index: 1;
+    position: absolute;
+    height: 31px;
+    width: 24px;
+    background-color: #157fcc;
+    visibility: hidden;
 }
 
-/* content */
-.content {
-	height: calc(100% - 42px);
-	background-color: white;
-	overflow-y: scroll;
-	padding: 5px;
-	box-sizing: border-box;
-
-	color: black;
-	font-size: 13px;
-	font-weight: normal;
-	font-family: helvetica, arial, verdana, sans-serif;
+.left-btn.visible {
+    visibility: visible;
 }
 
-.content p:not(:first-child) {
-	margin-top: 5px;
+.right-btn {
+    /* background-image: url(./images/default-scroll-right.png); */
+    cursor: pointer;
+    z-index: 1;
+    right: 0;
+    position: absolute;
+    height: 31px;
+    width: 24px;
+    background-color: #157fcc;
+    visibility: hidden;
+}
+
+.center .right-btn.visible {
+    visibility: visible;
 }
 </style>
 
