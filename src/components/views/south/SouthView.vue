@@ -15,16 +15,14 @@
 
 <script>
 export default {
-  data() {
-    return {
-
-    }
-  },
-  methods: {
-    closeSlide() {
-      this.$emit('close-slide');
-    }
-  }
+    data() {
+        return {};
+    },
+    methods: {
+        closeSlide() {
+            this.$emit('close-slide');
+        },
+    },
 };
 </script>
 
@@ -74,7 +72,7 @@ export default {
     top: 18px;
     right: 10px;
 
-		background-color: red;
+    background-color: red;
 }
 
 .slide-btn:hover {
@@ -99,6 +97,6 @@ export default {
     margin: auto;
     top: -5px;
 
-		background-color: red;
+    background-color: red;
 }
 </style>

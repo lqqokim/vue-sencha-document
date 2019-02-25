@@ -49,7 +49,7 @@ export default {
         onClickTab(index) {
             this.selectedTabIndex = index;
         },
-         closeSlide() {
+        closeSlide() {
             this.$emit('close-slide');
         },
     },

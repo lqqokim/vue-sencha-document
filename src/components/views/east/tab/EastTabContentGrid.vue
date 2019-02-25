@@ -1,6 +1,6 @@
 <template>
   <div class="tabcontent table">
-		<p>Grid</p>
+    <p>Grid</p>
     <!-- <table>
       <tr>
         <th class="name">
@@ -12,7 +12,7 @@
           <span class="sort-btn"></span>
         </th>
       </tr>
-    </table> -->
+    </table>-->
   </div>
 </template>
 

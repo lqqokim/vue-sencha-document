@@ -12,7 +12,6 @@
 </template>
 
 <script>
-
 import WestAccordian from './accordian/WestAccordian';
 
 export default {
@@ -25,7 +24,6 @@ export default {
         },
     },
 };
-
 </script>
 
 <style scoped>
