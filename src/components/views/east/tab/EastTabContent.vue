@@ -1,7 +1,7 @@
 <template>
   <div class="content">
     <div class="top">
-      <button>test</button>
+      <button title="Test Button">test</button>
     </div>
 
     <keep-alive>

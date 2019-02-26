@@ -6,8 +6,8 @@
           <th
             v-for="(column, index) in columns"
             :key="index"
-            @click="sortByColumn(column, index); selectedColumn = column"
-            :class="{'active': selectedColumn === column}"
+            @click="onClickHeader(column, index); selectedColumn = column"
+            :class="{'active':selectedColumn === column}"
           >
             <div class="column">{{ column.header }}</div>
             <div class="arrow" :class="{ 'desc': !column.isAscending }"></div>
@@ -47,72 +47,77 @@ export default {
                 },
                 {
                     name: 'autoFitColumns',
-                    value: true,
+                    value: 'true',
                 },
                 {
                     name: 'borderWidth',
-                    value: 1,
+                    value: '1',
                 },
                 {
                     name: 'created',
-                    value: '10/15/2006',
+                    value: `${new Date().toLocaleString().slice(0,10)}`
                 },
                 {
                     name: 'grouping',
-                    value: false,
+                    value: 'false',
                 },
                 {
                     name: 'productionQuality',
-                    value: false,
+                    value: 'false',
                 },
                 {
                     name: 'tested',
-                    value: false,
+                    value: 'false',
                 },
                 {
                     name: 'version',
-                    value: 0.01,
+                    value: '0.01',
                 },
             ],
         };
     },
     methods: {
-        sortByColumn(column, index) {
+        onClickHeader(column, index) {
             let sortType;
 
-            if (this.selectedColumn === column) { // 선택한 Column 다시 선택
+            if (this.selectedColumn === column) {
+                // 선택했던 Column을 다시 선택
                 this.columns[index].isAscending = !this.columns[index]
                     .isAscending;
 
                 sortType = this.columns[index].isAscending ? 'asc' : 'desc';
             } else {
-                sortType = column.isAscending ? 'asc' : 'desc';
+                // 다른 Column 선택
+                this.columns.map(column => {// asc로 초기화
+                    !column.isAscending && (column.isAscending = true);
+                });
+
+                sortType = 'asc';
             }
 
-            const key = column.value;
-            let gridRows = this.gridRows;
-
-            if (sortType === 'asc') {
-                gridRows.sort((a, b) => {
-                    if (a[key] > b[key]) return 1;
-                    if (a[key] < b[key]) return -1;
-                    return 0;
-                });
-            } else if (sortType === 'desc') {
-                gridRows.sort((a, b) => {
-                    if (a[key] < b[key]) return 1;
-                    if (a[key] > b[key]) return -1;
-                    return 0;
-                });
+            this.sortByColumn(column.value, sortType);
+        },
+        sortByColumn(key, type) {
+            function ascending(a, b) {
+                if (a[key] > b[key]) return 1;
+                if (a[key] < b[key]) return -1;
+                return 0;
             }
+
+            function descending(a, b) {
+                if (a[key] < b[key]) return 1;
+                if (a[key] > b[key]) return -1;
+                return 0;
+            }
+
+            this.gridRows.sort(type === 'asc' ? ascending : descending);
         },
     },
     updated() {
         console.log('update');
-        console.log(JSON.stringify(this.gridRows));
     },
     created() {
-        // console.log('create');
+        this.selectedColumn = this.columns[0];
     },
     destroyed() {
         console.log('destroy');
@@ -122,6 +127,7 @@ export default {
 
 <style scoped>
 /* tablw */
+
 table {
     border-collapse: collapse;
     width: 100%;
@@ -137,7 +143,6 @@ th {
     color: #666666;
     background-color: #f5f5f5;
     font: bold 13px/15px helvetica, arial, verdana, sans-serif;
-
     padding: 7px 0 7px 10px;
     text-overflow: ellipsis;
 }
@@ -157,6 +162,7 @@ td {
 }
 
 /* table border */
+
 tr:first-child th {
     border-top: 0;
 }
@@ -176,9 +182,9 @@ th:last-child {
 }
 
 /* sort button */
+
 th.active .arrow {
     /* background-image: url(./images/sort_asc.png); */
-
     float: left;
     width: 12px;
     height: 12px;
@@ -188,7 +194,6 @@ th.active .arrow {
 
 th.active .arrow.desc {
     /* background-image: url(./images/sort_desc.png); */
-
     float: left;
     width: 12px;
     height: 12px;
