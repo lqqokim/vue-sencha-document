@@ -14,10 +14,10 @@
           v-for="(item, index) in tabs"
           :key="index"
           @click="onClickTab(index)"
-          :class="{ 'active' : selectedTabIndex === index}"
+          :class="{ 'active' : selectedTabIndex === index, 'close': item.isClose}"
         >
           <div class="title">{{item.title}}</div>
-          <div v-if="index" class="close"></div>
+          <div v-if="item.tabId" class="close-btn" @click.stop.prevent="closeTab(index)"></div>
         </div>
       </div>
     </div>
@@ -31,13 +31,17 @@ import EastTabContent from './tab/EastTabContent';
 export default {
     data() {
         return {
-            selectedTabIndex: 0,
+            selectedTabIndex: 1,
             tabs: [
                 {
+                    tabId: 0,
                     title: 'A Tab',
+                    isClose: false,
                 },
                 {
+                    tabId: 1,
                     title: 'Property Grid',
+                    isClose: false,
                 },
             ],
         };
@@ -49,9 +53,22 @@ export default {
         onClickTab(index) {
             this.selectedTabIndex = index;
         },
+        closeTab(index) {
+            this.tabs[index].isClose = true;
+
+            if (index === this.tabs.length - 1) {
+                // 마지막 아이템인 경우 이전의 탭 활성화
+                this.selectedTabIndex = index - 1;
+            } else {
+                this.selectedTabIndex = index + 1;
+            }
+        },
         closeSlide() {
             this.$emit('close-slide');
         },
+    },
+    destroyed() {
+        console.log('destroy');
     },
 };
 </script>
@@ -98,7 +115,7 @@ img.slide-btn {
     top: 10px;
     left: 136px;
 
-    background-color: red;
+    background-color: blue;
 }
 
 img.slide-btn:hover {
@@ -138,9 +155,13 @@ img.slide-btn:hover {
     color: #157fcc;
 }
 
-.close {
+.tab.close {
+    display: none;
+}
+
+.close-btn {
     float: left;
-    background-color: red;
+    background-color: blue;
     width: 12px;
     height: 12px;
     /* background-image: url(images/tab-default-close.png); */
@@ -159,6 +180,6 @@ img.slide-btn:hover {
     transform: translateY(-50%);
     transform: rotate(90deg);
 
-    background-color: red;
+    background-color: blue;
 }
 </style>

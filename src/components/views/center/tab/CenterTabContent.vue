@@ -1,9 +1,7 @@
 <template>
-  <div class="content">
-    <keep-alive>
-      <component :is="selectedTabComponent"></component>
-    </keep-alive>
-  </div>
+  <keep-alive>
+    <component :is="selectedTabComponent"></component>
+  </keep-alive>
 </template>
 
 <script>

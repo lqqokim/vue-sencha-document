@@ -29,6 +29,10 @@
 </template>
 
 <script>
+// common
+import EventBus from './components/common/event-bus.js';
+
+// components
 import WestView from './components/views/west/WestView';
 import NorthView from './components/views/north/NorthView';
 import CenterView from './components/views/center/CenterView';
@@ -60,6 +64,15 @@ export default {
         controlSouth() {
             this.isSouthClose = !this.isSouthClose;
         },
+    },
+    created() {
+        EventBus.$on('toggle-west', () => {
+            // scope가 Vue Component
+            this.controlWest();
+        });
+    },
+    destroyed() {
+        EventBus.$off('toggle-west');
     },
 };
 </script>
@@ -102,7 +115,7 @@ p {
     font-family: helvetica, arial, verdana, sans-serif;
 }
 
-table span {
+/* table span {
     color: #666666;
     font: bold 13px/15px helvetica, arial, verdana, sans-serif;
 }
@@ -116,7 +129,7 @@ td {
     text-overflow: ellipsis;
     padding: 2px 5px 3px 10px;
     font: normal 13px/15px helvetica, arial, verdana, sans-serif;
-}
+} */
 
 .title {
     font-size: 13px;

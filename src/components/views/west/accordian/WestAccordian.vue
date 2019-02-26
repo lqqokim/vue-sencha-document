@@ -1,11 +1,21 @@
 <template>
   <div class="accordian">
-    <div class="item" v-for="(item, index) in items" :key="index">
+    <div
+      class="item"
+      :class="{ 'expand' : selectedItem === index}"
+      v-for="(item, index) in items"
+      :key="index"
+    >
       <div class="header">
         <img class="tool" :src="item.img">
         <div>
           <div class="title">{{item.title}}</div>
-          <img class="expand-btn" :src="item.button">
+          <img
+            class="expand-btn"
+            :class="{'change' : selectedItem === index}"
+            :src="item.button"
+            @click="controlAccordian(index)"
+          >
         </div>
       </div>
       <div class="content">
@@ -24,6 +34,7 @@ import InformationImg from './../../../../assets/icons/information.png';
 export default {
     data() {
         return {
+            selectedItem: 0,
             items: [
                 {
                     img: NavigationImg,
@@ -48,6 +59,24 @@ export default {
                 },
             ],
         };
+    },
+    methods: {
+        controlAccordian(index) {
+            if (this.selectedItem !== index) {
+                // 다른 item 클릭
+                this.selectedItem = index;
+            } else {
+                // 같은 item 클릭
+                if (this.selectedItem === this.items.length - 1) {
+                    this.selectedItem = index - 1;
+                } else {
+                    this.selectedItem = index + 1;
+                }
+            }
+        },
+    },
+    destroyed() {
+        console.log('destroy');
     },
 };
 </script>
@@ -104,9 +133,6 @@ export default {
     margin-top: 5px;
 }
 
-img {
-}
-
 img.tool {
     float: left;
     position: relative;
@@ -123,7 +149,7 @@ img.tool {
     background-color: #dfeaf2;
     background-position: 16px 128px;
 
-    background-color: red;
+    background-color: blue;
 
     width: 16px;
     height: 16px;
@@ -132,8 +158,10 @@ img.tool {
   background-image: url(src\assets\icons\tool-sprites-dark.png);
 } */
 
-img.expand-btn.change-expand {
+img.expand-btn.change {
     background-position: 0 -272px;
+
+    background-color: green;
 }
 
 img.expand-btn:hover {

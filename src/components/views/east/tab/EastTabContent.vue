@@ -24,19 +24,9 @@ export default {
         EastTabContentLetter,
         EastTabContentGrid,
     },
-    data() {
-        return {
-            activeTab: 0,
-        };
-    },
-    watch: {
-        tabIndex(tabIndex) {
-            this.activeTab = tabIndex;
-        },
-    },
     computed: {
         selectedTabComponent() {
-            switch (this.activeTab) {
+            switch (this.tabIndex) {
                 case 0:
                     return EastTabContentLetter;
                 case 1:
@@ -45,6 +35,9 @@ export default {
                     return EastTabContentLetter;
             }
         },
+    },
+    created() {
+        console.log('create');
     },
 };
 </script>
@@ -71,7 +64,5 @@ export default {
     border-radius: 3px;
 }
 
-/* .tabcontent {
-    display: none;
-} */
+
 </style>

@@ -5,7 +5,11 @@
 </template>
 
 <script>
-export default {};
+export default {
+    destroyed() {
+        console.log('destroy');
+    },
+};
 </script>
 
 <style scoped>

@@ -23,6 +23,9 @@ export default {
             this.$emit('close-slide');
         },
     },
+    destroyed() {
+        console.log('destroy');
+    },
 };
 </script>
 
@@ -72,7 +75,7 @@ export default {
     top: 18px;
     right: 10px;
 
-    background-color: red;
+    background-color: blue;
 }
 
 .slide-btn:hover {
@@ -97,6 +100,6 @@ export default {
     margin: auto;
     top: -5px;
 
-    background-color: red;
+    background-color: blue;
 }
 </style>

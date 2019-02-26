@@ -9,10 +9,10 @@
           v-for="(item, index) in tabs"
           :key="index"
           @click="onClickTab(index)"
-          :class="{ 'active': selectedTabIndex === index }"
+          :class="{ 'active' : selectedTabIndex === index, 'close': item.isClose}"
         >
           <div class="title">{{item.title}}</div>
-          <div v-if="!index" class="close"></div>
+          <div v-if="!item.tabId" class="close-btn" @click.stop.prevent="closeTab(index)"></div>
         </div>
       </div>
     </div>
@@ -28,12 +28,17 @@ export default {
     data() {
         return {
             selectedTabIndex: 0,
+            isClose: false,
             tabs: [
                 {
+                    tabId: 0,
                     title: 'Close Me',
+                    isClose: false,
                 },
                 {
+                    tabId: 1,
                     title: 'Center Panel',
+                    isClose: false,
                 },
             ],
         };
@@ -44,6 +49,16 @@ export default {
     methods: {
         onClickTab(index) {
             this.selectedTabIndex = index;
+        },
+        closeTab(index) {
+            this.tabs[index].isClose = true;
+
+            if (index === this.tabs.length - 1) {
+                // 마지막 아이템인 경우 이전의 탭 활성화
+                this.selectedTabIndex = index - 1;
+            } else {
+                this.selectedTabIndex = index + 1;
+            }
         },
     },
 };
@@ -91,16 +106,20 @@ export default {
     color: #157fcc;
 }
 
+.tab.close {
+    display: none;
+}
+
 .title {
     float: left;
     margin: 10px 15px 0 15px;
 }
 
-.close {
+.close-btn {
     float: left;
     width: 12px;
     height: 12px;
-    background-color: red;
+    background-color: blue;
 
     margin: 2px;
     /* background-image: url(src\assets\icons\tab-default-close.png); */
