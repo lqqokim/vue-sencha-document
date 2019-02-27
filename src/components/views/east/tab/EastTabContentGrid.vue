@@ -16,7 +16,7 @@
       </thead>
       <tbody>
         <tr v-for="(row, index) in gridRows" :key="index">
-          <td v-for="(column, index) in columns" :key="index">{{row[column.value]}}</td>
+          <td :class="[`${index}`]" v-for="(column, index) in columns" :key="index" @click="!index && onclickRow(row)">{{row[column.value]}}</td>
         </tr>
       </tbody>
     </table>
@@ -113,6 +113,9 @@ export default {
 
             this.gridRows.sort(type === 'asc' ? ascending : descending);
         },
+        onclickRow(row) {
+            console.log(row);
+        }
     },
     updated() {
         console.log('update');
@@ -168,6 +171,10 @@ td {
 
 tr:first-child th {
     border-top: 0;
+}
+
+tr:nth-child(2n) {
+    background-color: #FAFAFA;
 }
 
 td:first-child,
