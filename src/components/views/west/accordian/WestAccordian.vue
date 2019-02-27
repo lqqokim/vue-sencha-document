@@ -5,17 +5,13 @@
       :class="{ 'expand' : selectedItem === index}"
       v-for="(item, index) in items"
       :key="index"
+      @click="controlAccordian(index)"
     >
       <div class="header">
         <img class="tool" :src="item.img">
         <div>
           <div class="title">{{item.title}}</div>
-          <img
-            class="expand-btn"
-            :class="{'change' : selectedItem === index}"
-            :src="item.button"
-            @click="controlAccordian(index)"
-          >
+          <div class="expand-btn" :class="{'change' : selectedItem === index}" :src="item.button"></div>
         </div>
       </div>
       <div class="content">
@@ -26,36 +22,31 @@
 </template>
 
 <script>
-import NavigationImg from './../../../../assets/icons/folder_go.png';
-import SettingsImg from './../../../../assets/icons/folder_wrench.png';
-import InformationImg from './../../../../assets/icons/information.png';
-// import ExpandImg from './../../../assets/icons/tool-sprites-dark.png';
-
 export default {
     data() {
         return {
             selectedItem: 0,
             items: [
                 {
-                    img: NavigationImg,
+                    img: 'static/icons/navigation.png',
                     title: 'Navigation',
                     class: 'navigation',
                     content: "Hi. I'm the west panel.",
-                    // button: ExpandImg,
+                    button: 'static/icons/expand.png',
                 },
                 {
-                    img: SettingsImg,
+                    img: 'static/icons/settings.png',
                     title: 'Settings',
                     class: 'settings',
                     content: 'Some settings in here.',
-                    // button: ExpandImg,
+                    button: 'static/icons/expand.png',
                 },
                 {
-                    img: InformationImg,
+                    img: 'static/icons/information.png',
                     title: 'Information',
                     class: 'information',
                     content: 'Some info in here.',
-                    // button: ExpandImg,
+                    button: 'static/icons/expand.png',
                 },
             ],
         };
@@ -96,7 +87,7 @@ export default {
 .header > div {
     float: left;
     width: 150px;
-    margin: -7px 9px 0px 35px;
+    margin: -8px 0 0 31px;
 }
 
 .header:hover {
@@ -114,6 +105,7 @@ export default {
     height: 32px;
     transition: all 0.3s;
     position: relative;
+    cursor: default;
 }
 
 .item.expand {
@@ -133,7 +125,7 @@ export default {
     margin-top: 5px;
 }
 
-img.tool {
+.tool {
     float: left;
     position: relative;
     top: 8px;
@@ -142,29 +134,20 @@ img.tool {
 
 .expand-btn {
     float: right;
-    /* position: relative; */
-    /* top: 0px; */
     cursor: pointer;
     opacity: 0.5;
     background-color: #dfeaf2;
     background-position: 16px 128px;
-
-    background-color: blue;
-
     width: 16px;
     height: 16px;
+    background-image: url(./../../../../assets/icons/tool-sprites-dark.png);
 }
-/* img.expand-btn {
-  background-image: url(src\assets\icons\tool-sprites-dark.png);
-} */
 
-img.expand-btn.change {
+.expand-btn.change {
     background-position: 0 -272px;
-
-    background-color: green;
 }
 
-img.expand-btn:hover {
+.expand-btn:hover {
     opacity: 0.6;
 }
 </style>

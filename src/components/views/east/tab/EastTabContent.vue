@@ -49,7 +49,7 @@ export default {
 }
 
 .top {
-    padding: 6px 0 6px 177px;
+    padding: 6px 0 6px 188px;
 }
 
 .top button {

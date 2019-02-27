@@ -2,10 +2,12 @@
   <div class="west">
     <div class="panel">
       <div class="header">
-        <span class="title">West</span>
-        <img class="slide-btn" @click="closeSlide">
+        <div class="title">West</div>
+        <div class="slide-btn" @click="closeSlide"></div>
       </div>
+
       <WestAccordian/>
+    
     </div>
     <div class="split-slider" @click="closeSlide"></div>
   </div>
@@ -47,33 +49,24 @@ export default {
 .header {
     height: 36px;
     background-color: #157fcc;
+    padding: 10px;
+    box-sizing: border-box;
 }
 
 .header .title {
-    position: relative;
-    top: 7px;
-    left: 10px;
-    height: 16px;
+    float: left;
     color: white;
-    line-height: 15px;
-    text-transform: none;
 }
 
 .slide-btn {
-    /* background-image: url(images/tool-sprites.png); */
+    background-image: url(./../../../assets/icons/tool-sprites.png);
+    float: right;
     opacity: 0.5;
     background-color: #157fcc;
     background-position: 0 -192px;
-    overflow: hidden;
     width: 16px;
     height: 16px;
-    margin: 0;
     cursor: pointer;
-    position: relative;
-    top: 10px;
-    left: 139px;
-
-    background-color: blue;
 }
 
 .slide-btn:hover {
@@ -84,14 +77,12 @@ export default {
     cursor: pointer;
     width: 50px;
     height: 7px;
-    /* background-image: url(src/assets/icons/mini-top.png); */
+    background-image: url(./../../../assets/icons/mini-top.png);
     left: 179px;
     margin: 0;
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
     transform: rotate(270deg);
-
-    background-color: blue;
 }
 </style>

@@ -10,7 +10,7 @@
             :class="{'active':selectedColumn === column}"
           >
             <div class="column">{{ column.header }}</div>
-            <div class="arrow" :class="{ 'desc': !column.isAscending }"></div>
+            <span class="arrow" :class="{ 'desc': !column.isAscending }"></span>
           </th>
         </tr>
       </thead>
@@ -55,7 +55,7 @@ export default {
                 },
                 {
                     name: 'created',
-                    value: `${new Date().toLocaleString().slice(0,10)}`
+                    value: `${new Date().toLocaleString().slice(0, 10)}`,
                 },
                 {
                     name: 'grouping',
@@ -88,7 +88,8 @@ export default {
                 sortType = this.columns[index].isAscending ? 'asc' : 'desc';
             } else {
                 // 다른 Column 선택
-                this.columns.map(column => {// asc로 초기화
+                this.columns.map(column => {
+                    // asc로 초기화
                     !column.isAscending && (column.isAscending = true);
                 });
 
@@ -131,6 +132,7 @@ export default {
 table {
     border-collapse: collapse;
     width: 100%;
+    cursor: default;
 }
 
 td,
@@ -156,6 +158,7 @@ th.active {
 }
 
 td {
+    height: 20px;
     text-overflow: ellipsis;
     padding: 2px 5px 3px 10px;
     font: normal 13px/15px helvetica, arial, verdana, sans-serif;
@@ -184,20 +187,18 @@ th:last-child {
 /* sort button */
 
 th.active .arrow {
-    /* background-image: url(./images/sort_asc.png); */
+    background-image: url(./../../../../assets/icons/sort-asc.png);
     float: left;
-    width: 12px;
-    height: 12px;
-    margin: 2px 0 0px 5px;
-    background-color: blue;
+    width: 16px;
+    height: 16px;
+    margin-left: 1px;
 }
 
 th.active .arrow.desc {
-    /* background-image: url(./images/sort_desc.png); */
+    background-image: url(./../../../../assets/icons//sort-desc.png);
     float: left;
-    width: 12px;
-    height: 12px;
-    margin: 2px 0 0px 5px;
-    background-color: green;
+    width: 16px;
+    height: 16px;
+    margin-left: 1px;
 }
 </style>

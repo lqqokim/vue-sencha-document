@@ -2,8 +2,8 @@
   <div class="east">
     <div class="panel">
       <div class="header">
-        <span class="title">East Side</span>
-        <img class="slide-btn" @click="closeSlide">
+        <div class="title">East Side</div>
+        <div class="slide-btn" @click="closeSlide"></div>
       </div>
 
       <EastTabContent :tabIndex="selectedTabIndex"/>
@@ -17,7 +17,7 @@
           :class="{ 'active' : selectedTabIndex === index, 'close': item.isClose}"
         >
           <div class="title">{{item.title}}</div>
-          <div v-if="item.tabId" class="close-btn" @click.stop.prevent="closeTab(index)"></div>
+          <span v-if="item.tabId" class="close-btn" @click.stop.prevent="closeTab(index)"></span>
         </div>
       </div>
     </div>
@@ -82,40 +82,31 @@ export default {
 }
 
 .panel {
-    height: calc(100% - 42px);
+    height: calc(100% - 37px);
 }
 
 .header {
     height: 36px;
     background-color: #157fcc;
+    padding: 10px;
+    box-sizing: border-box;
 }
 
 .header .title {
-    position: relative;
-    top: 7px;
-    left: 10px;
-
+    float: left;
     height: 16px;
     color: white;
-    line-height: 15px;
-    text-transform: none;
 }
 
-img.slide-btn {
-    /* background-image: url(images/tool-sprites.png); */
+.slide-btn {
+    background-image: url(./../../../assets/icons/tool-sprites.png);
+    float: right;
     opacity: 0.5;
     background-color: #157fcc;
     background-position: 0 -176px;
-    overflow: hidden;
     width: 16px;
     height: 16px;
-    margin: 0;
     cursor: pointer;
-    position: relative;
-    top: 10px;
-    left: 136px;
-
-    background-color: blue;
 }
 
 img.slide-btn:hover {
@@ -161,10 +152,9 @@ img.slide-btn:hover {
 
 .close-btn {
     float: left;
-    background-color: blue;
     width: 12px;
     height: 12px;
-    /* background-image: url(images/tab-default-close.png); */
+    background-image: url(./../../../assets/icons/tab-default-close.png);
     margin: -5px -5px 0 20px;
 }
 
@@ -172,7 +162,7 @@ img.slide-btn:hover {
     cursor: pointer;
     width: 50px;
     height: 7px;
-    /* background-image: url(./images/mini-top.png); */
+    background-image: url(./../../../assets/icons//mini-top.png);
     left: -29px;
     margin: 0;
     position: absolute;
@@ -180,6 +170,6 @@ img.slide-btn:hover {
     transform: translateY(-50%);
     transform: rotate(90deg);
 
-    background-color: blue;
+    /* background-color: blue; */
 }
 </style>

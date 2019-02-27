@@ -3,8 +3,8 @@
     <div class="panel">
       <div class="header">
         <div class="split-slider" @click="closeSlide"></div>
-        <span class="title">South</span>
-        <img class="slide-btn" @click="closeSlide">
+        <div class="title">South</div>
+        <div class="slide-btn" @click="closeSlide"></div>
       </div>
       <div class="content">
         <p>south - generally for informational stuff, also could be for status bar</p>
@@ -55,27 +55,21 @@ export default {
 }
 
 .title {
-    position: relative;
-    top: 9px;
-    left: 10px;
+    float: left;
+    margin: 9px;
     color: white;
 }
 
 .slide-btn {
-    /* background-image: url(images/tool-sprites.png); */
+    background-image: url(./../../../assets/icons/tool-sprites.png);
     opacity: 0.5;
     background-color: #157fcc;
     background-position: 0 -224px;
-    overflow: hidden;
     width: 16px;
     height: 16px;
-    margin: 0;
     cursor: pointer;
-    position: absolute;
-    top: 18px;
-    right: 10px;
-
-    background-color: blue;
+    float: right;
+    margin: 9px;
 }
 
 .slide-btn:hover {
@@ -96,10 +90,12 @@ export default {
     position: relative;
     width: 50px;
     height: 7px;
-    /* background-image: url(./images/mini-top.png); */
+    background-image: url(./../../../assets/icons/mini-top.png);
     margin: auto;
     top: -5px;
+}
 
-    background-color: blue;
+.south.open .split-slider {
+    transform: rotate(180deg);
 }
 </style>

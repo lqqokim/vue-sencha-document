@@ -10,7 +10,7 @@
 
       <div class="west-collapse" :class="{'open': isWestClose}">
         <div class="split-slider" @click="controlWest"></div>
-        <img class="slide-btn" @click="controlWest">
+        <div class="slide-btn" @click="controlWest"></div>
         <div class="title">West</div>
       </div>
 
@@ -19,7 +19,7 @@
 
       <div class="east-collapse" :class="{'open': isEastClose}">
         <div class="split-slider" @click="controlEast"></div>
-        <img class="slide-btn" @click="controlEast">
+        <div class="slide-btn" @click="controlEast"></div>
         <div class="title">East Side</div>
       </div>
     </div>
@@ -30,7 +30,7 @@
 
 <script>
 // common
-import EventBus from './components/common/event-bus.js';
+import EventBus from './components/utils/event-bus.js';
 
 // components
 import WestView from './components/views/west/WestView';
@@ -115,28 +115,10 @@ p {
     font-family: helvetica, arial, verdana, sans-serif;
 }
 
-/* table span {
-    color: #666666;
-    font: bold 13px/15px helvetica, arial, verdana, sans-serif;
-}
-
-th span {
-    padding: 7px 0 7px 10px;
-    text-overflow: ellipsis;
-}
-
-td {
-    text-overflow: ellipsis;
-    padding: 2px 5px 3px 10px;
-    font: normal 13px/15px helvetica, arial, verdana, sans-serif;
-} */
-
 .title {
     font-size: 13px;
     font-weight: bold;
     font-family: helvetica, arial, verdana, sans-serif;
-    /* line-height: 16px;
-            text-transform: none; */
 }
 
 .main {
@@ -171,24 +153,18 @@ td {
 .west-collapse .title {
     transform: rotate(90deg);
     color: white;
-    margin-top: 50px;
+    margin-top: 20px;
 }
 
 .west-collapse .slide-btn {
-    /* background-image: url(images/tool-sprites.png); */
+    background-image: url(./assets/icons/tool-sprites.png);
     opacity: 0.5;
     background-color: #157fcc;
     background-position: 0 -176px;
-    overflow: hidden;
     width: 16px;
     height: 16px;
-    margin: 0;
     cursor: pointer;
-    position: absolute;
-    top: 10px;
-    right: 14px;
-
-    background-color: red;
+    margin: 10px 0 0 15px;
 }
 
 .west-collapse .slide-btn:hover {
@@ -199,15 +175,13 @@ td {
     cursor: pointer;
     width: 50px;
     height: 7px;
-    /* background-image: url(./images/mini-top.png); */
+    background-image: url(./assets/icons/mini-top.png);
     margin: 0;
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
     transform: rotate(90deg);
     left: 22px;
-
-    background-color: red;
 }
 
 /* east-collapse */
@@ -226,31 +200,22 @@ td {
 }
 
 .east-collapse .title {
+    -webkit-transform: rotate(90deg);
     transform: rotate(90deg);
     color: white;
-    margin-top: 50px;
-
-    width: 100px;
-    position: relative;
-    top: 25px;
-    right: 28px;
+    margin: 26px 0 0 -8px;
+    width: 60px;
 }
 
 .east-collapse .slide-btn {
-    /* background-image: url(images/tool-sprites.png); */
+    background-image: url(./assets/icons/tool-sprites.png);
     opacity: 0.5;
     background-color: #157fcc;
     background-position: 0 -192px;
-    overflow: hidden;
     width: 16px;
     height: 16px;
-    margin: 0;
     cursor: pointer;
-    position: absolute;
-    top: 10px;
-    right: 14px;
-
-    background-color: red;
+    margin: 10px 0 0 15px;
 }
 
 .east-collapse .slide-btn:hover {
@@ -261,15 +226,13 @@ td {
     cursor: pointer;
     width: 50px;
     height: 7px;
-    /* background-image: url(./images/mini-top.png); */
+    background-image: url(./assets/icons/mini-top.png);
     margin: 0;
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
     transform: rotate(270deg);
     left: -28px;
-
-    background-color: red;
 }
 
 /* west slide */
