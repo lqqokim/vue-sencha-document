@@ -65,10 +65,7 @@ export default {
                 }
             }
         },
-    },
-    destroyed() {
-        console.log('destroy');
-    },
+    }
 };
 </script>
 

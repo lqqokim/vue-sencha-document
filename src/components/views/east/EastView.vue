@@ -27,23 +27,13 @@
 
 <script>
 import EastTabContent from './tab/EastTabContent';
+import EastModel from './../../models/EastModel';
 
 export default {
     data() {
         return {
             selectedTabIndex: 1,
-            tabs: [
-                {
-                    tabId: 0,
-                    title: 'A Tab',
-                    isClose: false,
-                },
-                {
-                    tabId: 1,
-                    title: 'Property Grid',
-                    isClose: false,
-                },
-            ],
+            tabs: [],
         };
     },
     components: {
@@ -66,10 +56,16 @@ export default {
         closeSlide() {
             this.$emit('close-slide');
         },
+        errorHandler(err) {
+            console.log(err);
+        }
     },
-    destroyed() {
-        console.log('destroy');
-    },
+    created() {
+        // tab data를 가져온다.
+        EastModel.getTabList()
+            .then(tabs => (this.tabs = tabs))
+            .catch(err => this.errorHandler(err));
+    }
 };
 </script>
 
@@ -114,6 +110,7 @@ img.slide-btn:hover {
 }
 
 .bottom {
+    position: relative;
     height: 31px;
     border-top: 5px solid #add2ed;
     background-color: #157fcc;

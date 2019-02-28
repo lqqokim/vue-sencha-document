@@ -1,0 +1,13 @@
+{
+    "datas": [{
+            "tabId": 0,
+            "title": "A Tab",
+            "isClose": false
+        },
+        {
+            "tabId": 1,
+            "title": "Property Grid",
+            "isClose": false
+        }
+    ]
+}

@@ -35,10 +35,7 @@ export default {
                     return EastTabContentLetter;
             }
         },
-    },
-    created() {
-        console.log('create');
-    },
+    }
 };
 </script>
 

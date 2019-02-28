@@ -15,8 +15,12 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(row, index) in gridRows" :key="index">
-          <td :class="[`${index}`]" v-for="(column, index) in columns" :key="index" @click="!index && onclickRow(row)">{{row[column.value]}}</td>
+        <tr ref="rows" v-for="(row, tr_index) in gridList" :key="tr_index">
+          <td
+            v-for="(column, td_index) in columns"
+            :key="td_index"
+            @click="!td_index && onclickRow(tr_index); selectedRow = row"
+          >{{row[column.value]}}</td>
         </tr>
       </tbody>
     </table>
@@ -24,56 +28,16 @@
 </template>
 
 <script>
+import EastModel from './../../../models/EastModel';
+
 export default {
     data() {
         return {
             selectedColumn: null,
-            columns: [
-                {
-                    header: 'Name',
-                    value: 'name',
-                    isAscending: true,
-                },
-                {
-                    header: 'Value',
-                    value: 'value',
-                    isAscending: true,
-                },
-            ],
-            gridRows: [
-                {
-                    name: '(name)',
-                    value: 'Properties Grid',
-                },
-                {
-                    name: 'autoFitColumns',
-                    value: 'true',
-                },
-                {
-                    name: 'borderWidth',
-                    value: '1',
-                },
-                {
-                    name: 'created',
-                    value: `${new Date().toLocaleString().slice(0, 10)}`,
-                },
-                {
-                    name: 'grouping',
-                    value: 'false',
-                },
-                {
-                    name: 'productionQuality',
-                    value: 'false',
-                },
-                {
-                    name: 'tested',
-                    value: 'false',
-                },
-                {
-                    name: 'version',
-                    value: '0.01',
-                },
-            ],
+            selectedRow: null,
+            focusedEl: null,
+            columns: [],
+            gridList: [],
         };
     },
     methods: {
@@ -111,21 +75,41 @@ export default {
                 return 0;
             }
 
-            this.gridRows.sort(type === 'asc' ? ascending : descending);
+            this.gridList.sort(type === 'asc' ? ascending : descending);
+            this.selectedRow && this.focusRow();
         },
-        onclickRow(row) {
-            console.log(row);
-        }
-    },
-    updated() {
-        console.log('update');
+        focusRow() {
+            this.focusedEl.classList.remove('focus');
+            const focusedRowIndex = this.gridList.indexOf(this.selectedRow);
+            this.focusedEl = this.$refs.rows[focusedRowIndex].children[1];
+            this.focusedEl.classList.add('focus');
+        },
+        onclickRow(index) {
+            if (this.focusedEl && this.focusedEl.classList.contains('focus')) {
+                this.focusedEl.classList.remove('focus');
+            }
+
+            const selectedRowEl = this.$refs.rows[index];
+            this.focusedEl = selectedRowEl.children[1];
+            this.focusedEl.classList.add('focus');
+        },
+        errorHandler(err) {
+            console.log(err);
+        },
     },
     created() {
-        this.selectedColumn = this.columns[0];
+        // grid data를 가져온다.
+        EastModel.getGridList()
+            .then(data => {
+                this.gridList = data.rows;
+                this.columns = data.columns;
+                this.selectedColumn = this.columns[0];
+            })
+            .catch(err => this.errorHandler(err));
     },
     destroyed() {
-        console.log('destroy');
-    },
+        console.log('destroy')
+    }
 };
 </script>
 
@@ -167,6 +151,10 @@ td {
     font: normal 13px/15px helvetica, arial, verdana, sans-serif;
 }
 
+td.focus {
+    background-color: #c4ddf2;
+}
+
 /* table border */
 
 tr:first-child th {
@@ -174,7 +162,7 @@ tr:first-child th {
 }
 
 tr:nth-child(2n) {
-    background-color: #FAFAFA;
+    background-color: #fafafa;
 }
 
 td:first-child,

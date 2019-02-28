@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import EventBus from './../../../utils/event-bus.js';
+import EventBus from './../../../common/utils/event-bus.js';
 
 export default {
     methods: {

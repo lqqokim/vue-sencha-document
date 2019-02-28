@@ -30,7 +30,7 @@
 
 <script>
 // common
-import EventBus from './components/utils/event-bus.js';
+import EventBus from './components/common/utils/event-bus.js';
 
 // components
 import WestView from './components/views/west/WestView';

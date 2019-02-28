@@ -22,10 +22,7 @@ export default {
         closeSlide() {
             this.$emit('close-slide');
         },
-    },
-    destroyed() {
-        console.log('destroy');
-    },
+    }
 };
 </script>
 

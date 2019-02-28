@@ -1,0 +1,14 @@
+{
+    "datas": [
+        {
+            "tabId": 0,
+            "title": "Close Me",
+            "isClose": false
+        },
+        {
+            "tabId": 1,
+            "title": "Center Panel",
+            "isClose": false
+        }
+    ]
+}
