@@ -1,6 +1,12 @@
-# vue-example-page
+# VueJS 기반 Document Page
 
-> A Vue.js project
+> VueJS를 사용하여 Sencha Document Page를 구현
+
+## Screenshots
+
+<img src="./src/assets/icons/screen.gif" width="800">
+<!-- <img src="./src/assets/icons/screen2.png" width="500"> -->
+<!-- <img src="./src/assets/icons/screen3.png" width="300" height="450"> -->
 
 ## Build Setup
 
